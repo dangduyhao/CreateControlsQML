@@ -12,6 +12,7 @@ Window {
 
     title: qsTr("Advanced exercises")
 
+    // Create main loader for LongText.qml
     Loader {
         id: mainLoader
         x: 0; y: 0

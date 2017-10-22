@@ -10,13 +10,14 @@ Item {
         height: parent.height - controlArea.height
         color: "#ecf0f1"
 
+        // Create Flickable to load long text
         Flickable {
             id: flickable
             anchors.fill: parent
-            //        clip: true
             contentHeight: longText.implicitHeight
             smooth: true
 
+            // Load long text
             Text {
                 id: longText
                 anchors.fill: parent
@@ -71,6 +72,7 @@ Item {
             }
         }
 
+        // Scroll bar from ScrollBar.qml
         ScrollBar {
             id: textScrollBar
             width: 10
@@ -86,8 +88,8 @@ Item {
         height: 80
         anchors.top: textArea.bottom
         color: "#bdc3c7"
-        //        opacity: 0.8
 
+        // Create Decline button, click to quit
         Rectangle {
             id: btDecline
             width: 120
@@ -114,6 +116,7 @@ Item {
             }
         }
 
+        // Create Accept button, click to load TabView.qml
         Rectangle {
             id: btAccept
             width: 120

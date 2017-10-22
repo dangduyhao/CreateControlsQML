@@ -4,10 +4,12 @@ Item {
     id: comboArea
     height: 30
 
+    // Create number of selection line showing on drop list area
     property int selectionLine: 3
     property alias dropListText: dropListText
     property alias text: dropListText.text
 
+    // Create function of show/hide drop list when click to down arrow
     function showDropList() {
         if (dropList.visible === false)
             dropList.visible = true
@@ -15,6 +17,7 @@ Item {
             dropList.visible = false
     }
 
+    // Create combo box with text
     Rectangle {
         id: comboBox
         width: parent.width
@@ -32,6 +35,7 @@ Item {
             text: "Choose selection..."
         }
 
+        // Create down arrow
         Rectangle {
             id: downArrowArea
             width: downArrow.width + 20
@@ -57,6 +61,7 @@ Item {
         }
     }
 
+    // Create drop list
     Rectangle {
         id: dropList
         anchors.top: comboBox.bottom; anchors.topMargin: 15
@@ -127,6 +132,7 @@ Item {
             }
         }
 
+        // Create scroll bar for drop list
         ScrollBar {
             id: dropListScrollBar
             width: 6
