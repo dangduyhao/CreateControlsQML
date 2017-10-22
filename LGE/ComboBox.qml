@@ -6,8 +6,7 @@ Item {
 
     // Create number of selection line showing on drop list area
     property int selectionLine: 3
-    property alias dropListText: dropListText
-    property alias text: dropListText.text
+
 
     // Create function of show/hide drop list when click to down arrow
     function showDropList() {

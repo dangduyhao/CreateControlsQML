@@ -22,6 +22,7 @@ Item {
             snapMode: ListView.SnapToItem
             orientation: ListView.Horizontal
             highlightRangeMode: ListView.StrictlyEnforceRange
+            highlightMoveVelocity : 2000
 
             onCurrentIndexChanged: {
                 tabList.currentIndex = screenList.currentIndex
