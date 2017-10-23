@@ -1,4 +1,4 @@
-import QtQuick 2.8
+import QtQuick 2.6
 
 Rectangle {
     width: 480
@@ -23,16 +23,17 @@ Rectangle {
         selectionLine: 3
     }
 
-//    Text {
-//        anchors.fill: parent
-//        anchors.left: parent.left; anchors.leftMargin: 50
-//        anchors.right: parent.right; anchors.rightMargin: 50
-//        anchors.top: parent.top; anchors.topMargin: 150
-//        horizontalAlignment: Text.AlignHCenter
-//        font.family: "Ubuntu"
-//        font.bold: true
-//        font.pixelSize: 18
-//        color: "#ecf0f1"
-//        text: qsTr("Combo Box is choosed the " + comboText.text)
-//    }
+    Switch {
+        id: switchChange
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top; anchors.topMargin: 400
+        checked: false
+//        onCheckedChanged: console.log("Switch changed " + checked)
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "Black"
+        opacity: switchChange.checked ? 0.7 : 0
+    }
 }

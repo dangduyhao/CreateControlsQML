@@ -1,8 +1,8 @@
-import QtQuick 2.8
+import QtQuick 2.6
 
 Item {
     id: comboArea
-    height: 30
+    height: 50
 
     // Create number of selection line showing on drop list area
     property int selectionLine: 3
@@ -63,6 +63,7 @@ Item {
     // Create drop list
     Rectangle {
         id: dropList
+        z: 2
         anchors.top: comboBox.bottom; anchors.topMargin: 15
         anchors.left: comboBox.left
         width: comboBox.width

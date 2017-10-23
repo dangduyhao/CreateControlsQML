@@ -1,4 +1,4 @@
-import QtQuick 2.8
+import QtQuick 2.6
 
 Item {
     width: 480
@@ -19,8 +19,8 @@ Item {
         ListView {
             id: screenList
             anchors.fill: parent
-            snapMode: ListView.SnapToItem
             orientation: ListView.Horizontal
+            snapMode: ListView.SnapToItem
             highlightRangeMode: ListView.StrictlyEnforceRange
             highlightMoveVelocity : 2000
 
@@ -54,14 +54,14 @@ Item {
             width: parent.width
             height: 5
             anchors.top: parent.top
-            color: "#3498db"
+            color: "#1abc9c"
         }
 
         ListModel {
             id: tabModel
             ListElement { name: "Combo Box" }
-            ListElement { name: "Calendar" }
             ListElement { name: "A-Z Listview" }
+            ListElement { name: "Calendar" }
         }
 
         ListView {
