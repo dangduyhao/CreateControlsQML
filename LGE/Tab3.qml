@@ -9,12 +9,16 @@ Rectangle {
         id: datePicker
         anchors.right: monthPicker.left; anchors.rightMargin: 5
         y: 100
+        //        modelPicker:
     }
+
+
 
     DateTimePicker {
         id: monthPicker
         anchors.horizontalCenter: parent.horizontalCenter
         y: 100
+        modelPicker: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     }
 
     DateTimePicker {
