@@ -20,20 +20,20 @@ Rectangle {
         width: 200
         anchors.right: parent.right; anchors.rightMargin: 50
         anchors.top: parent.top; anchors.topMargin: 50
-        selectionLine: 3
+        selectionLine: 3 // Show number of selection line on drop list
     }
 
     Switch {
         id: switchChange
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top; anchors.topMargin: 400
-        checked: false
+        checked: true
 //        onCheckedChanged: console.log("Switch changed " + checked)
     }
 
     Rectangle {
         anchors.fill: parent
         color: "Black"
-        opacity: switchChange.checked ? 0.7 : 0
+        opacity: switchChange.checked ? 0 : 0.7
     }
 }

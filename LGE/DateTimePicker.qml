@@ -6,8 +6,15 @@ Rectangle {
     height: 200
     color: "#ecf0f1"
     opacity: 0.8
+    clip: true
 
     property var modelPicker: 10
+    property var currentTime: 0
+    property var offsetTime: 0
+
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
 
     Rectangle {
         width: parent.width * 0.8
@@ -25,28 +32,37 @@ Rectangle {
         color: "#1abc9c"
     }
 
-    ListView {
+    PathView {
         id: dateScroll
         anchors.horizontalCenter: pickerArea.horizontalCenter
         anchors.verticalCenter: pickerArea.verticalCenter
         width: pickerArea.width
-        height: pickerArea.height / 3
-        snapMode: ListView.SnapToItem
+        height: pickerArea.height
+        currentIndex: currentTime - offsetTime - 3
 
-        model: modelPicker
+        model: isNumber(modelPicker) ? modelPicker - offsetTime : modelPicker
 
-        delegate: Rectangle {
+        delegate: Item {
             width: pickerArea.width
-            height: pickerArea.height / 3
-            color: "Transparent"
+            height: pickerArea.height
 
             Text {
+                id: textPicker
                 anchors.centerIn: parent
                 font.family: "Ubuntu"
                 font.bold: true
                 font.pixelSize: 18
                 color: "#2c3e50"
-                text: isNumber(modelData) ? modelData + 1 : modelData
+                text: isNumber(modelPicker) ? modelData + 1 + offsetTime : modelData
+            }
+        }
+
+        path: Path {
+            startX: pickerArea.width / 2
+            startY: - pickerArea.height / 6
+            PathLine {
+                x: pickerArea.width/2
+                y: isNumber(modelPicker) ? (modelPicker - offsetTime) * pickerArea.height / 3 : modelPicker.length * pickerArea.height / 3
             }
         }
     }

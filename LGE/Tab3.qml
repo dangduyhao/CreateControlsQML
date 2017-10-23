@@ -6,24 +6,29 @@ Rectangle {
     color: "#bdc3c7"
 
     DateTimePicker {
-        id: datePicker
-        anchors.right: monthPicker.left; anchors.rightMargin: 5
-        y: 100
-        //        modelPicker:
+        id: dateScroll
+        anchors.right: monthScroll.left; anchors.rightMargin: 5
+        y: 50
+        modelPicker: 31
+        currentTime: 23
     }
 
-
-
     DateTimePicker {
-        id: monthPicker
+        id: monthScroll
         anchors.horizontalCenter: parent.horizontalCenter
-        y: 100
+        y: 50
         modelPicker: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        currentTime: 8
     }
 
     DateTimePicker {
-        id: yearPicker
-        anchors.left: monthPicker.right; anchors.leftMargin: 5
-        y: 100
+        id: yearScroll
+        anchors.left: monthScroll.right; anchors.leftMargin: 5
+        y: 50
+        modelPicker: 2100
+        offsetTime: 1970
+        currentTime: 2017
     }
+
+
 }
