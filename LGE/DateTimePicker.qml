@@ -38,7 +38,7 @@ Rectangle {
         anchors.verticalCenter: pickerArea.verticalCenter
         width: pickerArea.width
         height: pickerArea.height
-        currentIndex: currentTime - offsetTime - 3
+        currentIndex: isNumber(modelPicker) ? currentTime - offsetTime - 3 : currentTime - 2
 
         model: isNumber(modelPicker) ? modelPicker - offsetTime : modelPicker
 

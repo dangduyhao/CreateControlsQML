@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 Rectangle {
+    id: screenTab2
     width: 480
     height: 580
     color: "#95a5a6"
@@ -12,7 +13,9 @@ Rectangle {
         anchors.right: parent.right; anchors.rightMargin: 20
         anchors.top: parent.top; anchors.topMargin: 10
         anchors.bottom: parent.bottom; anchors.bottomMargin: 10
-        snapMode: ListView.SnapToItem
+        snapMode: ListView.SnapOneItem
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        highlightMoveVelocity: 2000
         clip: true
 
         model: contact
@@ -35,13 +38,6 @@ Rectangle {
                 font.pixelSize: 18
                 text: name
                 color: "#2c3e50"
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    console.log(index)
-                }
             }
         }
     }
@@ -122,14 +118,14 @@ Rectangle {
 
     ListView {
         id: listLetter
-        anchors.right: parent.right; anchors.rightMargin: 0
+        anchors.right: parent.right; anchors.rightMargin: 15
         anchors.top: parent.top; anchors.topMargin: 10
         anchors.bottom: parent.bottom; anchors.bottomMargin: 10
         model: sortLetter
 
         delegate: Rectangle {
             width: 10
-            height: (parent.width - 20) / 26
+            height: (screenTab2.height - 20) / 26
             color: "Transparent"
 
             Text {
@@ -138,37 +134,69 @@ Rectangle {
                 text: letter
                 color: "#2c3e50"
             }
+
+            Rectangle {
+                id: popup
+                width: 100
+                height: 30
+                anchors.right: parent.right; anchors.rightMargin: 15
+                anchors.verticalCenter: parent.verticalCenter
+                color: "Black"
+                opacity: 0
+
+                Text {
+                    anchors.left: parent.left; anchors.leftMargin: 10
+                    font.pixelSize: 24
+                    text: letter
+                    color: "White"
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    listContact.currentIndex = indexNumber
+                }
+
+                hoverEnabled: true
+                onEntered: {
+                    popup.opacity = 0.7
+                }
+                onExited: {
+                    popup.opacity = 0
+                }
+            }
         }
     }
 
     ListModel {
         id: sortLetter
 
-        ListElement { letter: "A" } // Index = 0
-        ListElement { letter: "B" } // Index = 5
-        ListElement { letter: "C" } // Index = 11
-        ListElement { letter: "D" } // Index = 13
-        ListElement { letter: "E" } // Index = 15
-        ListElement { letter: "F" } // Index = 17
-        ListElement { letter: "G" } // Index = 19
-        ListElement { letter: "H" } // Index = 23
-        ListElement { letter: "I" } // Index = 26
-        ListElement { letter: "J" } // Index = 28
-        ListElement { letter: "K" } // Index = 30
-        ListElement { letter: "L" } // Index = 32
-        ListElement { letter: "M" } // Index = 35
-        ListElement { letter: "N" } // Index = 38
-        ListElement { letter: "O" } // Index = 41
-        ListElement { letter: "P" } // Index = 43
-        ListElement { letter: "Q" } // Index = 47
-        ListElement { letter: "R" } // Index = 48
-        ListElement { letter: "S" } // Index = 52
-        ListElement { letter: "T" } // Index = 53
-        ListElement { letter: "U" } // Index = 57
-        ListElement { letter: "V" } // Index = 59
-        ListElement { letter: "W" } // Index = 61
-        ListElement { letter: "X" } // Index = 64
-        ListElement { letter: "Y" } // Index = 65
-        ListElement { letter: "Z" } // Index = 68
+        ListElement { letter: "A"; indexNumber: 0 } // Index = 0
+        ListElement { letter: "B"; indexNumber: 5 } // Index = 5
+        ListElement { letter: "C"; indexNumber: 11 } // Index = 11
+        ListElement { letter: "D"; indexNumber: 13 } // Index = 13
+        ListElement { letter: "E"; indexNumber: 15 } // Index = 15
+        ListElement { letter: "F"; indexNumber: 17 } // Index = 17
+        ListElement { letter: "G"; indexNumber: 19 } // Index = 19
+        ListElement { letter: "H"; indexNumber: 23 } // Index = 23
+        ListElement { letter: "I"; indexNumber: 26 } // Index = 26
+        ListElement { letter: "J"; indexNumber: 28 } // Index = 28
+        ListElement { letter: "K"; indexNumber: 30 } // Index = 30
+        ListElement { letter: "L"; indexNumber: 32 } // Index = 32
+        ListElement { letter: "M"; indexNumber: 35 } // Index = 35
+        ListElement { letter: "N"; indexNumber: 38 } // Index = 38
+        ListElement { letter: "O"; indexNumber: 41 } // Index = 41
+        ListElement { letter: "P"; indexNumber: 43 } // Index = 43
+        ListElement { letter: "Q"; indexNumber: 47 } // Index = 47
+        ListElement { letter: "R"; indexNumber: 48 } // Index = 48
+        ListElement { letter: "S"; indexNumber: 52 } // Index = 52
+        ListElement { letter: "T"; indexNumber: 53 } // Index = 53
+        ListElement { letter: "U"; indexNumber: 57 } // Index = 57
+        ListElement { letter: "V"; indexNumber: 59 } // Index = 59
+        ListElement { letter: "W"; indexNumber: 61 } // Index = 61
+        ListElement { letter: "X"; indexNumber: 64 } // Index = 64
+        ListElement { letter: "Y"; indexNumber: 65 } // Index = 65
+        ListElement { letter: "Z"; indexNumber: 68 } // Index = 68
     }
 }
