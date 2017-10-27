@@ -3,9 +3,8 @@ import "Constants.js" as Constants
 Item {
     id: main_app
     visible: true
-
+    objectName: "thanh"
     property bool hasStatusBar: true
-
     HomeIndicatorObject{
     }
 

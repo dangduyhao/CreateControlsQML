@@ -23,6 +23,14 @@ Item {
             source: "images/function_separator_tbt.png"
         }
 
+        Text {
+            anchors.left: btBack.right; anchors.leftMargin: 25
+            anchors.verticalCenter: btBack.verticalCenter
+            font.pixelSize: 30
+            color: "White"
+            text: "Route Preview"
+        }
+
         Image {
             id: btBack
             anchors.top: imgTopBar.top

@@ -6,9 +6,11 @@ Item {
     width: Constants.screen_width
     height: Constants.screen_height
 
+    property bool hasStatusBar: true
+
     property var fanValue: 0.5
-    property var tempLeftValue: 20
-    property var tempRightValue: 20
+    property var tempLeftValue: 50
+    property var tempRightValue: 50
 
     function pressObject(obj) {
         if (obj.opacity === 0)
@@ -16,6 +18,14 @@ Item {
         else
             obj.opacity = 0
     }
+
+//    function controlValue(n, min, max, step) {
+//        var n, min, max, step;
+//        if (n > min && n < max)
+//        {
+
+//        }
+//    }
 
     Image {
         id: topArea
@@ -205,7 +215,7 @@ Item {
                 id: fanDownClick
                 anchors.fill: parent
                 onClicked: {
-                    fanValue += 0.1
+                    fanValue += 0.05
                 }
             }
         }
@@ -232,7 +242,7 @@ Item {
                 id: fanUpClick
                 anchors.fill: parent
                 onClicked: {
-                    fanValue -= 0.1
+                    fanValue -= 0.05
                 }
             }
         }

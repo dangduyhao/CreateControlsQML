@@ -21,9 +21,13 @@ Window {
     }
 
     StatusBar {
-
+        id: statusBar
     }
     onScreenChange: {
         screen.source = event
+        if (screen.children[0].hasStatusBar)
+            statusBar.y = Constants.status_bar_y
+        else
+             statusBar.y = Constants.screen_height
     }
 }

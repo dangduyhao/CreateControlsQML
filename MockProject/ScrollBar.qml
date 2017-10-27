@@ -25,7 +25,7 @@ Item {
     // Create a scroll bar
     Rectangle {
         anchors.fill: parent
-        color: "Black"
+        color: "Gray"
         opacity: 0.3
     }
 

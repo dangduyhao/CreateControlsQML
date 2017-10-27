@@ -43,10 +43,8 @@ Item {
         scaleAnimation.to = 1;
         scaleAnimation.start();
     }
-
     onIconImageSource_NormalChanged:
         iconImage.source = iconImageSource_Normal;
-
     Image {
         id: iconImage
         source: iconImageSource_Normal
