@@ -65,7 +65,7 @@ Item {
                 id: climate_icon_mousearea
                 anchors.fill: parent
                 onClicked: {
-                    app.screenChange("ClimateFront.qml")
+                    app.screenChange("Climate.qml")
                 }
             }
         }

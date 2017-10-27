@@ -155,7 +155,7 @@ Item {
                     app.screenChange("PhoneKeypad.qml");
                     break;
                 case 2:
-                    app.screenChange("ClimateFront.qml");
+                    app.screenChange("Climate.qml");
                     break;
                 case 3:
                     app.screenChange("SettingSystem.qml")

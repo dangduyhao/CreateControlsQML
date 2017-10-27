@@ -4,6 +4,8 @@ Item {
     id: main_app
     visible: true
 
+    property bool hasStatusBar: true
+
     HomeIndicatorObject{
     }
 
