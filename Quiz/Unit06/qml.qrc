@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Clock.qml</file>
+        <file>Clocks.qml</file>
+        <file>Signal.qml</file>
+        <file>TText.qml</file>
+        <file>images/clock.png</file>
+        <file>images/clock_night.png</file>
+        <file>images/hour.png</file>
+        <file>images/minute.png</file>
+        <file>images/second.png</file>
+        <file>deployment.pri</file>
+        <file>main.cpp</file>
+        <file>qml.qrc</file>
+        <file>Unit06.pro</file>
+        <file>Student.qml</file>
+        <file>images/alarm.png</file>
+        <file>images/home.png</file>
+        <file>images/lock.png</file>
+        <file>images/settings.png</file>
+        <file>images/tasks.png</file>
+        <file>HomeScreen.qml</file>
+        <file>images/exit.png</file>
+        <file>MainForm.ui.qml</file>
+        <file>page1.qml</file>
+        <file>page2.qml</file>
+        <file>images/bg.jpg</file>
+    </qresource>
+</RCC>
