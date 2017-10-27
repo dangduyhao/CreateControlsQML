@@ -57,6 +57,7 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     dateModel.showPrevious()
+                    daysGrid.currentIndex = -1
                 }
             }
         }
@@ -81,6 +82,7 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     dateModel.showNext()
+                    daysGrid.currentIndex = -1
                 }
             }
         }
@@ -114,19 +116,20 @@ Rectangle {
 
     GridView {
         id: daysGrid
-        x: 0; y: 80
+        x: 0; y: 2 * parent.height / 8
         width: parent.width
         height:  parent.height * 6 / 8
         cellWidth: parent.width / 7
         cellHeight: parent.height / 8
         interactive: false
+        clip: true
 
         model: dateModel
 
         delegate: Item {
             id: dayCell
-            width: parent.width / 7
-            height:  parent.height / 8
+            width: daysGrid.cellWidth
+            height: daysGrid.cellHeight
 
             property bool isOtherMonthDay: model.isOtherMonthDay
             property bool isCurrentDay: model.isCurrentDay
@@ -135,30 +138,36 @@ Rectangle {
             property date dateOfDay: model.dateOfDay
 
             function color() {
-                if (GridView.isCurrentItem)
-                    return "#e67e22"            // Seleced Day Color
-                else if (isCurrentDay)
+                if (isCurrentDay)
                     return "#1abc9c"            // Current Day Color
+                else if (GridView.isCurrentItem)
+                    return "#e67e22"            // Seleced Day Color
                 else if (isOtherMonthDay)
                     return "#7f8c8d"            // Other Month Day Color
                 return "#34495e"                // Day Color
+            }
+
+            function bgColor() {
+                if (isCurrentDay)
+                    return "#e67e22"            // Current Day Color
+                else if (GridView.isCurrentItem)
+                    return "#1abc9c"            // Seleced Day Color
+                else if (isOtherMonthDay)
+                    return "Transparent"            // Other Month Day Color
+                return "Transparent"                // Day Color
             }
 
             Rectangle {
                 z: 1
                 anchors.fill: parent
                 radius: 5
-                color: "#1abc9c"
-                opacity: 0
+                color: dayCell.bgColor()
+                opacity: 0.5
 
                 MouseArea {
                     anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        parent.opacity = 0.7
-                    }
-                    onExited: {
-                        parent.opacity = 0
+                    onClicked: {
+                        daysGrid.currentIndex = index
                     }
                 }
             }
@@ -167,19 +176,10 @@ Rectangle {
                 z: 2
                 anchors.centerIn: parent
                 font.family: "Ubuntu"
-                font.bold: true
+                font.bold: (!isOtherMonthDay) ? true : false
                 font.pixelSize: 18
                 color: dayCell.color()
                 text: dayCell.dateOfDay.getDate()
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    daysGrid.currentIndex = index
-                    dateModel.selectedDate = daysGrid.currentItem.dateOfDay
-                    dateModel.changeModel(daysGrid.currentItem.dateOfDay)
-                }
             }
         }
     }
