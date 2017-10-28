@@ -1,0 +1,267 @@
+import QtQuick 2.6
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.2
+import "Constants.js" as Constants
+Item {
+    id: fmTab
+    Item{
+        x:0; y: 66
+        Image {
+            id:header
+            source: Constants.function_separator_audio
+        }
+    }
+    Text {
+        id: fmStation
+        x: 80
+        y: 18
+        color: "white"
+        font.pixelSize: 30
+        text: qsTr("FM Station")
+    }
+    Image {
+        x: 708
+        y: 20
+        source: Constants.statusbar_timetemp_separator
+    }
+    Image {
+        x: 70
+        y: 20
+        source: Constants.statusbar_timetemp_separator
+    }
+    Item{
+        x:0; y: 0
+        Image {
+            id:backHeader
+            source:  Constants.back_normal
+            MouseArea{
+                id: backHeaderMouse
+                anchors.fill: parent
+                onPressed:  {
+                    backHeader.source = Constants.back_highlight
+                }
+                onReleased: {
+                    app.screenChange("AudioNowPlaying.qml")
+                }
+            }
+        }
+    }
+    Item{
+        x:710; y: 0
+        Image {
+            id: deleteHeader
+            source: "images/close_normal.png"
+            MouseArea{
+                id: deleteHeaderMouse
+                anchors.fill: parent
+                onPressed:  {
+                    deleteHeader.source = Constants.close_highlight
+                }
+                onReleased: {
+                    app.screenChange("AudioNowPlaying.qml")
+                }
+            }
+        }
+    }
+    property int i: 0
+    Rectangle{
+        id: rect1
+        x: 100
+        y: 80
+        width: 800
+        height: 400
+        color: "transparent"
+        ListModel {
+            id: dataModel
+            ListElement { name: "Categories"; letter: "A"; favorite:false }
+            ListElement { name: "Update Station List"; letter: "B"; favorite:false }
+            ListElement { name: "90.1  "; letter: "C"; favorite:false }
+            ListElement { name: "95"; letter: "B"; favorite:false}
+            ListElement { name: "96.8"; letter: "D"; favorite:false}
+            ListElement { name: "97 "; letter: "F"; favorite:false}
+            ListElement { name: "99.98 "; letter: "I"; favorite:false}
+            ListElement { name: "100 "; letter: "E"; favorite:false }
+            ListElement { name: "100.3 "; letter: "G"; favorite:false}
+            ListElement { name: "196.69 "; letter: "H"; favorite:false}
+            ListElement { name: "200.2 "; letter: "M"; favorite:false}
+            ListElement { name: " 300"; letter: "N"; favorite:false}
+            ListElement { name: "400.3"; letter: "O"; favorite:false}
+            ListElement { name: "400"; letter: "P";favorite:false }
+            ListElement { name: "234"; letter: "Q"; favorite:false}
+            ListElement { name: "422"; letter: "T"; favorite:false}
+            ListElement { name: "%91.0%"; letter: "Z"; favorite:false}
+        }
+        ListView{
+            id: lV
+            model: dataModel
+            anchors.fill: parent
+            anchors.margins: 20
+            clip: true
+            focus: true
+            delegate:spaceManDelegate
+            section.property: "letter"
+            section.delegate: sectionDelegate
+            highlight: Rectangle {color: "red"; opacity: 0.5}
+            onCurrentIndexChanged: showPopup()
+            onContentYChanged: {
+                currentIndex = Math.round(lV.contentY/40)
+                scroll3.y = lV.contentY
+            }
+        }
+        Component {
+            id: spaceManDelegate
+            Item {
+                width: ListView.view.width
+                height: 20
+                Text {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: 8
+                    font.pixelSize: 25
+                    color: "white"
+                    text: name
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: lV.currentIndex = index
+                    }
+                }
+                Image {
+                    id: imgIcon
+                    source: (favorite===true) ?"images/favorite_active.png": "images/favorite_inactive.png"
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: 600
+                    MouseArea{
+                        id: imgMou
+                        anchors.fill: parent
+                        onClicked: {
+                            if(favorite === true)
+                            dataModel.set(index, {"favorite": false})
+                            else
+                                 dataModel.set(index, {"favorite": true})
+
+
+//                            console.log(favorite)
+                        }
+                    }
+                }
+            }
+        }
+        Component {
+            id: sectionDelegate
+            Rectangle {
+                width: ListView.view.width
+                height: 20
+                Image {
+                    id: txt
+                    source: "images/function_separator.png"
+                }
+                color: "transparent"
+            }
+        }
+    }
+
+//    function getIndex(data) {
+//        for(i = 0; i < dataModel.count; i++) {
+//            if (data === dataModel.get(i).letter)
+//                lV.currentIndex = i;
+//        }
+//    }
+    Rectangle{
+        id: popUp
+        anchors.centerIn: parent
+        height: 150
+        width: 150
+        radius: 75
+        color: "black"
+        border.width: 5
+        border.color: "orange"
+        visible: false
+        Text {
+            id: popUpContent
+            anchors.centerIn: parent
+            text: qsTr("text")
+            color: "white"
+        }
+    }
+    Timer {
+        id: timer
+        repeat: false
+        onTriggered: popUp.visible = false
+    }
+    function showPopup() {
+        timer.interval = 2000
+        popUp.visible = true
+        popUpContent.text = lV.model.get(lV.currentIndex).name
+        timer.start()
+    }
+    Image {
+        id: scroll1
+        x: 10; y: 80
+        source: "images/scrollbar_bg_long.png"
+        MouseArea{
+
+        }
+    }
+    Image {
+        id: scroll3
+        x:10; y: 80
+        height: 60
+        source: "images/scrollbar_indicator_long.png"
+        MouseArea{
+            id: mou1
+            anchors.fill: parent
+            drag.axis: Drag.YAxis
+            drag.minimumY: 80
+            drag.maximumY: 260
+            drag.target : scroll3
+        }
+        onYChanged:
+                    {
+                         timer.running = true
+                        if(mou1.drag.active)
+                        {
+                            lV.contentY = scroll3.y/lV.height*rect1.height ;//cong thuc
+                           timer.running = true ;
+                        }
+
+                        if(y < mou1.drag.minimumY)
+                        {
+                            y = mou1.drag.minimumY ;
+                        }
+                        if(y > mou1.drag.maximumY)
+                        {
+                            y = mou1.drag.maximumY ;
+
+                        }
+                    }
+    }
+    Image {
+        id:upScroll
+        x:10; y: 320
+        source: "images/scroll_up_normal.png"
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                scroll3.y = 80
+                popUp.visible = true
+                lV.contentY -= 400
+                timer.start()
+            }
+        }
+    }
+    Image {
+        id:downScroll
+        x:10; y: 400
+        source: "images/scroll_down_normal.png"
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                scroll3.y =245
+                popUp.visible = true
+                lV.contentY += 400
+                timer.start()
+            }
+        }
+    }
+
+    }
